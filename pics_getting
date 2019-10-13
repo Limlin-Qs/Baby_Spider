@@ -1,0 +1,18 @@
+import requests
+import os
+url = "-the address of pic-"
+root = "D://pics//"
+path = root + url.split('/')[-1] # 根目录后面加网址中/后的内容，即图片文件名
+try:
+    if not os.path.exists(root):   #根目录是否存在
+         os.mkdir(root)
+    if not os.path.exists(path):   #文件是否存在
+         r = requests.get(url)
+         with open(path,'wb') as f:
+             f.write(r.content)
+             f.close()
+             print("file saved")
+    else:
+         print("file already exist")
+except:
+    print("failed to get the data")
